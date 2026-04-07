@@ -5,9 +5,9 @@ apis:
   - aid: equifax:equifax
     name: Equifax API
     tags:
-      - Credit Reporting
       - Credit
       - Credit History
+      - Credit Reporting
     humanURL: ' https://developer.equifax.com/'
     properties:
       - url: ' https://developer.equifax.com/'
@@ -20,9 +20,9 @@ apis:
       it easier to make informed decisions about potential customers and partners.
 name: Equifax
 tags:
-  - Credit Reporting
   - Credit
   - Credit History
+  - Credit Reporting
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
