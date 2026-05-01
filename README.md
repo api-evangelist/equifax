@@ -1,42 +1,50 @@
 # Equifax (equifax)
-Equifax is a consumer credit reporting agency that collects and aggregates information on individuals' credit history, including their borrowing and repayment habits. This information is used by lenders and creditors to assess an individual's creditworthiness and make decisions about extending credit. Equifax also offers identity theft protection services, credit monitoring, and fraud detection services to help consumers protect their sensitive financial information. Additionally, Equifax provides analytics and consulting services to businesses to help them make informed decisions and manage risk. With a wealth of data and expertise in credit reporting, Equifax plays a crucial role in the financial industry by providing accurate and reliable information to support responsible lending practices.
+
+Equifax is a consumer credit reporting agency that collects and aggregates information on individuals' credit history, including borrowing and repayment habits. This information is used by lenders and creditors to assess creditworthiness and make decisions about extending credit. Equifax also offers identity theft protection, credit monitoring, and fraud detection services, plus analytics and consulting offerings to help businesses manage risk.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/equifax/refs/heads/main/apis.yml)
 
 ## Scope
 
-- **Type:** Index 
-- **Position:** Consumer 
-- **Access:** 3rd-Party 
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
 ## Tags:
 
- - Credit Reporting, Credit, Credit History
+ - Credit, Credit History, Credit Reporting, Identity, Fraud Detection
 
 ## Timestamps
 
-- **Created:** 2025-02-24 
-- **Modified:** 2025-03-02 
+- **Created:** 2025-02-24
+- **Modified:** 2026-04-28
 
 ## APIs
 
 ### Equifax API
-The Equifax API is a powerful tool that allows businesses to seamlessly integrate Equifax's vast database of consumer credit information into their systems. This API enables companies to quickly and securely access credit reports, scores, and other valuable consumer data directly within their applications, making it easier to make informed decisions about potential customers and partners. By leveraging the Equifax API, businesses can streamline their credit verification processes, improve risk assessment, and enhance overall operational efficiency. This innovative solution empowers organizations to make smarter financial decisions and better manage their credit-related activities.
 
-**Human URL:** [ https://developer.equifax.com/]( https://developer.equifax.com/)
+The Equifax API platform provides programmatic access to Equifax's consumer credit information, including credit reports, credit scores, identity verification, and fraud detection. APIs are organized into categories that include Payment and Transaction, Geo/Location, Identity, Data Append, and Mobile, with featured products such as OneView, WalletInsights, Talent Report, PowerLead Check, Verification Exchange, Score Only, and OFAC Alert. Developer access is gated through the Equifax Developer Portal.
 
+**Human URL:** [https://developer.equifax.com/](https://developer.equifax.com/)
 
-#### Tags:
+#### Tags
 
- - Credit Reporting, Credit, Credit History
+- Credit, Credit History, Credit Reporting, Identity, Fraud Detection
 
 #### Properties
 
-- [Documentation]( https://developer.equifax.com/)
+- [Documentation](https://developer.equifax.com/)
+- [Developer](https://developer.equifax.com/)
+- [Products](https://developer.equifax.com/products/apiproducts)
+- [GettingStarted](https://developer.equifax.com/help-support/getting-started)
+
+## Common Properties
+
+- [Website](https://www.equifax.com/)
+- [Developer](https://developer.equifax.com/)
 
 ## Maintainers
 
 **FN:** Kin Lane
 
-**Email:** info@apievangelist.com
-
+**Email:** kin@apievangelist.com
