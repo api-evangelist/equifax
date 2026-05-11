@@ -57,6 +57,13 @@ common:
     url: https://www.equifax.com/
   - type: Developer
     url: https://developer.equifax.com/
+  - type: Integrations
+    url: https://www.equifax.com/business/partners/googlecloud
+integrations:
+  - name: Equifax
+  - name: US
+  - name: Your Privacy Choices
+  - name: Site
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
