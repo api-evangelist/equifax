@@ -53,6 +53,10 @@ apis:
       - type: GettingStarted
         url: https://developer.equifax.com/help-support/getting-started
 common:
+  - type: GitHubOrganization
+    url: https://github.com/Equifax-Public
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/equifax
   - type: Website
     url: https://www.equifax.com/
   - type: Developer
