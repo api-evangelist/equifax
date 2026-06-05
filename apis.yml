@@ -23,6 +23,7 @@ tags:
   - Credit Reporting
   - Identity
   - Fraud Detection
+  - Fortune 1000
 apis:
   - aid: equifax:equifax
     name: Equifax API
