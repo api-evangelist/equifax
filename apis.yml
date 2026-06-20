@@ -8,7 +8,7 @@ description: >-
   offers identity theft protection, credit monitoring, and fraud detection
   services, plus analytics and consulting offerings to help businesses manage
   risk.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: >-
   https://raw.githubusercontent.com/api-evangelist/equifax/refs/heads/main/apis.yml
 created: '2025-02-24'
@@ -37,7 +37,7 @@ apis:
       Score Only, and OFAC Alert. Developer access is gated through the
       Equifax Developer Portal.
     humanURL: https://developer.equifax.com/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Credit
       - Credit History
