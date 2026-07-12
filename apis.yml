@@ -54,6 +54,8 @@ apis:
       - type: GettingStarted
         url: https://developer.equifax.com/help-support/getting-started
 common:
+  - type: DomainSecurity
+    url: security/equifax-domain-security.yml
   - type: GitHubOrganization
     url: https://github.com/Equifax-Public
   - type: LinkedIn
@@ -64,6 +66,8 @@ common:
     url: https://developer.equifax.com/
   - type: Integrations
     url: https://www.equifax.com/business/partners/googlecloud
+  - url: https://www.equifax.com/newsroom/
+    type: Blog
 integrations:
   - name: Equifax
   - name: US
