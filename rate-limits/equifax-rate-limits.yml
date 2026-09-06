@@ -4,47 +4,86 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Equifax
 providerId: equifax
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-06'
+generated: '2026-09-06'
+method: searched
+source: https://developer.equifax.com/documentation
+reconciled: true
 tags:
   - Rate Limiting
   - Credit Bureau
   - Identity
   - Fraud Prevention
-description: Equifax does not publish public per-second or per-minute rate-limit numbers. Its developer
-  portal confirms HTTP throttling and standard error responses, but actual quotas are set per-customer
-  contract and provisioned at the API key/credentials level. Sandbox and production environments are
-  separated.
+description: >-
+  Equifax publishes NO numeric rate limit for any API product. The only limit statement on
+  a public Equifax page is a warning that limits change without notice: consumers are told
+  to expect that "rate limits applied to an API may change dynamically and may result in
+  the API returning http status code 429". Quotas themselves are provisioned per customer,
+  per product, at the credential level, and the production environment adds an IP
+  allow-list on top. Sandbox and Test are documented as having no usage constraints at all.
+  This replaces a 2026-05-04 bulk-sweep artifact that was written without a source; the
+  numbers below are now sourced or honestly zero.
 sources:
-  - https://developer.equifax.com
-  - https://developer.equifax.com/products
-notes: No public rate-limit numbers; contract-defined. Replace with the limits provisioned for your specific
-  Equifax credentials.
+  - url: https://developer.equifax.com/documentation
+    status: 200
+  - url: https://developer.equifax.com/help-support/getting-started
+    status: 200
+limit_count: 0
+limit_count_note: >-
+  An honest zero: Equifax publishes zero numeric limits. It is not a claim that no limits
+  are enforced — 429 is documented as the exhaustion status, so limits demonstrably exist;
+  they are simply contract-defined and unpublished.
 responseCodes:
   throttled: 429
   serviceUnavailable: 503
+headers:
+  published: false
+  ratelimit_headers: []
+  retry_after: not documented
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After contract is published, so an agent has no
+    runtime signal to pace itself with — only the 429 after the fact. Every response does
+    carry an `efx-transaction-id` correlation header (observed on a live probe of
+    https://api.equifax.com/, 2026-09-06), which is a support identifier, not a quota signal.
 limits:
   - name: Per-credentials negotiated limit
     scope: api-credentials
-    metric: varies
-    limit: contract-defined per customer and product
+    metric: unpublished
+    limit: null
+    published: false
+    note: Provisioned per customer and per product under contract; no public number.
   - name: Sandbox environment
     scope: sandbox-credentials
-    metric: varies
-    limit: lower than production; intended for integration testing only
+    metric: unpublished
+    limit: null
+    published: false
+    note: >-
+      Equifax states of Sandbox: "Currently there are no constraints." Of Test/UAT: "There
+      are no usage constraints applied to our test APIs."
+  - name: Live environment
+    scope: production-credentials
+    metric: unpublished
+    limit: null
+    published: false
+    note: >-
+      "Usage constraints: Please contact your Equifax sales representative." Production
+      additionally requires the calling gateway IP to be allow-listed; a non-allow-listed
+      IP gets 403, not 429.
 policies:
+  - name: Dynamic limits
+    description: >-
+      Equifax's published change policy tells consumers to build for limits that change
+      without notification and to expect a 429 as a result.
+    source: https://developer.equifax.com/documentation
   - name: Sandbox vs production
-    description: Use sandbox credentials for integration testing; production credentials carry FCRA-permissible-use
-      attestations and stricter audit logging.
+    description: >-
+      Use sandbox credentials for integration testing; production credentials require a Go
+      Live review, an IP allow-list, and FCRA-permissible-purpose obligations.
   - name: Backoff
-    description: On 429 / 503, apply exponential backoff with jitter; do not retry idempotent reads aggressively
-      as inquiries can post to the consumer's bureau record.
-  - name: Inquiry minimization
-    description: Cache permissible-use results where regulation allows to minimize repeated bureau pulls
-      against the same consumer.
+    description: >-
+      On 429 / 503, back off exponentially with jitter. Note that Equifax publishes no
+      idempotency mechanism, so a retried inquiry is not a safe no-op — an Equifax credit
+      inquiry posts to the consumer's file.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

@@ -35,7 +35,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/equifax.pn
 url: >-
   https://raw.githubusercontent.com/api-evangelist/equifax/refs/heads/main/apis.yml
 created: '2025-02-24'
-modified: '2026-04-28'
+modified: '2026-09-06'
 specificationVersion: '0.23'
 type: Index
 position: Consuming
@@ -60,6 +60,7 @@ apis:
       Score Only, and OFAC Alert. Developer access is gated through the
       Equifax Developer Portal.
     humanURL: https://developer.equifax.com/
+    baseURL: https://api.equifax.com
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Credit
@@ -69,13 +70,23 @@ apis:
       - Fraud Detection
     properties:
       - type: Documentation
-        url: https://developer.equifax.com/
-      - type: Developer
-        url: https://developer.equifax.com/
-      - type: Products
+        url: https://developer.equifax.com/documentation
+      - type: APIReference
         url: https://developer.equifax.com/products/apiproducts
       - type: GettingStarted
         url: https://developer.equifax.com/help-support/getting-started
+      - type: Authentication
+        url: authentication/equifax-authentication.yml
+      - type: OAuthScopes
+        url: scopes/equifax-scopes.yml
+      - type: Conventions
+        url: conventions/equifax-conventions.yml
+      - type: ErrorCatalog
+        url: errors/equifax-error-codes.yml
+      - type: Sandbox
+        url: sandbox/equifax-sandbox.yml
+      - type: RateLimits
+        url: rate-limits/equifax-rate-limits.yml
 common:
   - type: DomainSecurity
     url: security/equifax-domain-security.yml
@@ -85,12 +96,46 @@ common:
     url: https://www.linkedin.com/company/equifax
   - type: Website
     url: https://www.equifax.com/
-  - type: Developer
-    url: https://developer.equifax.com/
   - type: Integrations
     url: https://www.equifax.com/business/partners/googlecloud
   - url: https://www.equifax.com/newsroom/
     type: Blog
+  - type: DeveloperPortal
+    url: https://developer.equifax.com/
+  - type: SignUp
+    url: https://developer.equifax.com/user/register
+  - type: Login
+    url: https://developer.equifax.com/user/login
+  - type: Support
+    url: https://developer.equifax.com/contact
+  - type: TermsOfService
+    url: https://developer.equifax.com/terms
+  - type: PrivacyPolicy
+    url: https://www.equifax.com/privacy/privacy-statement
+  - type: LLMsTxt
+    url: llms/equifax-llms.txt
+  - type: Packages
+    url: packages/equifax-packages.yml
+  - type: Lifecycle
+    url: lifecycle/equifax-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/equifax-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/equifax-changelog.yml
+  - type: Conformance
+    url: conformance/equifax-conformance.yml
+  - type: Compliance
+    url: conformance/equifax-conformance.yml
+  - type: VulnerabilityDisclosure
+    url: security/equifax-vulnerability-disclosure.yml
+  - type: Security
+    url: security/equifax-vulnerability-disclosure.yml
+  - type: TrustCenter
+    url: security/equifax-trust-center.yml
+  - type: Plans
+    url: plans/equifax-plans-pricing.yml
+  - type: FinOps
+    url: finops/equifax-finops.yml
 integrations:
   - name: Equifax
   - name: US
@@ -99,3 +144,8 @@ integrations:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-06'
+  status: enriched
+  artifacts_added: 14
+  pass: local-v3

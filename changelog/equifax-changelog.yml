@@ -1,0 +1,97 @@
+generated: '2026-09-06'
+method: searched
+source: https://developer.equifax.co.uk/whats_new
+provider: Equifax
+providerId: equifax
+description: >-
+  Equifax's US developer portal links "Release Notes" from every page footer, but that URL
+  302s to the portal sign-in — the US changelog is gated. The only PUBLICLY readable,
+  dated Equifax API changelog found is the UK developer portal's "What's new" page, which
+  is served without authentication on the same Equifax platform. The entries below are
+  transcribed from it verbatim in substance; they are Equifax UK API changes, and are
+  labelled as such rather than presented as US platform history.
+scheme: dated prose entries grouped as New Products / Coming Soon / New Functionalities
+versioning_scheme: major version in the URI path segment (see lifecycle/equifax-lifecycle.yml)
+current_version: not published as a platform-wide number
+sources:
+  - url: https://developer.equifax.co.uk/whats_new
+    status: 200
+    scope: Equifax UK developer portal — public
+    last_updated: '2025-11-25'
+  - url: https://developer.equifax.com/release-notes
+    status: 302
+    redirects_to: https://developer.equifax.com/user/login?destination=/release-notes
+    scope: Equifax US developer portal — GATED, requires a portal account
+  - url: https://developer.equifax.ca/whats_new
+    status: 404
+    scope: Equifax Canada — no public what's-new page
+  - url: https://developer.equifax.com/whats_new
+    status: 404
+    scope: Equifax US — no public what's-new page
+gated: true
+gate: >-
+  US and Canadian release notes require a developer-portal sign-in
+  (https://developer.equifax.com/user/login).
+entry_count: 5
+entries:
+  - date: '2025-11'
+    period_stated: November / December 2025
+    category: New Products
+    region: UK
+    api: Business Search & Report
+    type: addition
+    breaking: false
+    summary: >-
+      VAT numbers and VAT registration information added to the Business Search & Report
+      API services. VAT detail appears in API responses first; searching BY VAT number is
+      stated as following later.
+  - date: '2025-12'
+    period_stated: December 2025 / January 2026
+    category: Coming Soon
+    region: UK
+    api: Sustainability Metrics API
+    type: new-api
+    breaking: false
+    summary: >-
+      Announced launch of a real-time API for automating measurement of financed emissions
+      (Scope 3.15), delivering PCAF-aligned calculations into lending workflows with a
+      dedicated Audit Endpoint for data lineage, aligned to UK SRS and IFRS S2. Built with
+      environmental data from CienDos.
+  - date: '2025-12'
+    period_stated: December 2025 / January 2026
+    category: Coming Soon
+    region: UK
+    api: Business Search & Report
+    type: addition
+    breaking: false
+    summary: >-
+      Persons of Significant Control information to be offered within the API response;
+      enablement is arranged through the customer's Equifax account manager.
+  - date: '2026-01'
+    period_stated: January 2026
+    category: Coming Soon
+    region: UK
+    api: Business (Portfolio) Monitoring
+    type: addition
+    breaking: false
+    summary: >-
+      Monitoring alerts for a change to a Person of Significant Control, alongside the
+      Business Search & Report PSC change.
+  - date: '2024-12-02'
+    period_stated: 2nd December 2024
+    category: New Functionalities
+    region: UK
+    api: All System-to-System services
+    type: behaviour-change
+    breaking: false
+    summary: >-
+      Token caching introduced for all System to System Services: the access_token is
+      reused for one hour instead of calling the authentication endpoint on every request.
+      Clients caching on a blanket timeframe were asked to switch to the expiry-time tag
+      returned in the Equifax response.
+    action_required: >-
+      Only for clients that cache tokens on a fixed timeframe — switch to the returned
+      expiry tag. No action for clients that do not cache.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

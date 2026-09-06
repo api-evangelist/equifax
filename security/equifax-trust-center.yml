@@ -1,0 +1,75 @@
+generated: '2026-09-06'
+method: searched
+probe: true
+source: https://www.equifax.com/about-equifax/security/
+url: https://trust.equifax.com/
+platform: SafeBase
+platform_evidence: >-
+  trust.equifax.com is a CNAME to equifax.portals.safebase.io (dig, 2026-09-06) — a
+  SafeBase-hosted trust center.
+readable_by_crawler: false
+readable_note: >-
+  Both https://trust.equifax.com/ and the underlying https://equifax.portals.safebase.io/
+  answered HTTP 403 with a Cloudflare "Just a moment..." interstitial to every request
+  this pipeline made, including with a browser User-Agent. The portal demonstrably exists;
+  we did not evade the challenge, so the certification list BEHIND it is not recorded here.
+  Only certifications Equifax states on pages we could actually read are listed below.
+description: >-
+  Equifax operates a SafeBase trust center at trust.equifax.com and publishes an annual
+  Security Annual Report plus a public security controls framework on GitHub. A separate
+  portal, securityreports.equifax.com, distributes security reports but is login-walled to
+  approved Equifax business users.
+certifications:
+  - name: FedRAMP
+    status: Ready for Agency Authorization
+    evidence: https://www.equifax.com/about-equifax/security/
+    quote: '"FedRAMP Ready for Agency Authorization"'
+  - name: NIST Cybersecurity Framework (CSF)
+    status: assessed
+    score: '4.4 (2025)'
+    evidence: https://www.equifax.com/about-equifax/security/
+    quote: >-
+      "a 2025 National Institute of Standards Technology (NIST) Cybersecurity Framework
+      (CSF) score of 4.4 - an increase from last year's score of 4.3"
+  - name: third-party certifications and authorizations (aggregate)
+    count: 52
+    status: claimed
+    evidence: https://www.equifax.com/about-equifax/security/
+    quote: >-
+      "52 Certifications and authorizations obtained from outside auditors, validating our
+      depth and rigor"
+    note: >-
+      Equifax states the COUNT but does not enumerate the 52 on this page. The individual
+      certificates are presumably behind the trust center and securityreports portal. Not
+      itemised here because we could not read them.
+public_artifacts:
+  - name: Equifax Security Annual Report
+    url: https://www.equifax.com/about-equifax/security/annual-report/
+    status: 200
+    access: public
+  - name: Equifax Security Controls Framework
+    url: https://github.com/Equifax-Public/SecurityControlsFramework
+    access: public
+    note: >-
+      Equifax states "thousands of users across 70 countries leverage our public security
+      controls framework"; the repository is the only one in the Equifax-Public GitHub org.
+  - name: Equifax Security Reports portal
+    url: https://securityreports.equifax.com/
+    status: 200
+    access: gated
+    gate: >-
+      "access to Equifax Security Reports is for Equifax Business users only. Access must
+      be approved internally prior to being granted."
+evidence:
+  - source: https://www.equifax.com/about-equifax/security/
+    status: 200
+    keywords: [fedramp ready, nist csf 4.4, 52 certifications, report a vulnerability]
+  - source: https://trust.equifax.com/
+    status: 403
+    kind: Cloudflare bot challenge — page exists, body not readable by this crawler
+  - source: https://securityreports.equifax.com/
+    status: 200
+    kind: login wall
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

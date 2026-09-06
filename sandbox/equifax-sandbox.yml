@@ -1,0 +1,82 @@
+generated: '2026-09-06'
+method: searched
+source: https://developer.equifax.com/documentation
+provider: Equifax
+providerId: equifax
+sources:
+  - url: https://developer.equifax.com/documentation
+    status: 200
+  - url: https://developer.equifax.com/help-support/getting-started
+    status: 200
+  - url: https://assets.equifax.com/marketing/US/assets/developer-quick-start-guide.PDF
+    status: 200
+description: >-
+  Equifax runs a three-tier environment model rather than a test-key prefix. Sandbox is
+  self-service after portal registration and costs nothing; Test (UAT) and Live each
+  require an Equifax approval step. There is no dry-run flag on a production call — you
+  change the base URL and the credentials.
+available: true
+self_service: true
+requires_account: true
+account_url: https://developer.equifax.com/user/register
+environments:
+  - name: Sandbox
+    base_url: https://api.sandbox.equifax.com
+    credentials: >-
+      Sandbox Client ID and Client Secret shown on the application page, or an
+      auto-generated Access Token the portal issues for the app.
+    approval_required: false
+    cost: >-
+      "You don't incur any cost for testing the API in the Sandbox environment."
+    usage_constraints: >-
+      "Currently there are no constraints."
+  - name: Test (UAT)
+    base_url: https://api.uat.equifax.com
+    credentials: Test Client ID and Client Secret, released after "Promote to Test" approval.
+    approval_required: true
+    approval_time: typically under 48 hours
+    cost: >-
+      "You don't incur any cost for testing the API in the UAT / Test environment."
+    usage_constraints: >-
+      "There are no usage constraints applied to our test APIs."
+    extras:
+      - Optional IP allow-list entries (IPv4/IPv6, optional CIDR) can be managed until Go Live.
+  - name: Live
+    base_url: https://api.equifax.com
+    approval_required: true
+    additional_security: >-
+      "Apart from valid API credentials, production APIs can only be accessed from
+      whitelisted IP Addresses."
+test_data:
+  published: false
+  note: >-
+    Equifax does not publish test identities, test SSNs, test member numbers or test cards
+    on any public page. Per-product smoke-test cases live in the "Additional API Docs" tab
+    of each product, which requires a portal sign-in. The public Teletrack quick-start
+    guide confirms this shape without disclosing values: integrators are told to run a
+    smoke test "using production test cases found within the additional API Docs tab of
+    the API you're integrating with", with "your test member number and corresponding
+    security code".
+  environment_only_markers:
+    - value: '@U1, @U2, @U3'
+      meaning: >-
+        Equifax-published codes that are valid ONLY in the testing environment. Equifax
+        explicitly instructs "Please do not use @U1, @U2, @U3 codes as those codes are
+        applicable in the testing environment only."
+      source: https://assets.equifax.com/marketing/US/assets/developer-quick-start-guide.PDF
+time_simulation:
+  supported: false
+  note: No test clock or time-simulation tooling is documented.
+fixtures_or_triggers:
+  supported: unknown
+  note: No public fixture/trigger tooling is documented; per-product test cases are gated.
+console:
+  type: developer portal application dashboard
+  url: https://developer.equifax.com/
+  note: >-
+    The portal issues an auto-generated Access Token per application, so a signed-in
+    developer can call sandbox without running a token flow by hand. The UK portal user
+    guide additionally documents a "Run in Postman" option on the API Reference tab.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

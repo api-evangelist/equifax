@@ -1,0 +1,89 @@
+generated: '2026-09-06'
+method: searched
+source: https://developer.equifax.com/documentation
+provider: Equifax
+providerId: equifax
+description: >-
+  Equifax publishes an explicit versioning and change policy on the public Developer
+  Portal documentation page, and a deprecation posture inside it. It does NOT publish an
+  API status page, an SLA, or Sunset/Deprecation response headers, and its US release
+  notes are behind the portal sign-in.
+versioning:
+  published: true
+  scheme: major version in the URI path segment (v1, v2)
+  example: POST https://api.equifax.com/namespace/v1/resource
+  policy: >-
+    "Equifax supports explicit versioning of API contracts. We use the major version
+    numbering scheme, which involves easily detectable patterns such as V1 or V2 in path
+    segments to distinguish URIs by their version." Backward-incompatible changes result
+    in the release of a new version; backward-compatible changes are tracked but do not
+    alter existing contracts.
+  source: https://developer.equifax.com/documentation
+deprecation:
+  policy_published: true
+  policy: >-
+    "APIs or their parameters and fields may be immediately deprecated for security
+    reasons. Otherwise, Equifax will provide reasonable notice of deprecations."
+  notice_period: not quantified ("reasonable notice")
+  immediate_deprecation_permitted: true
+  immediate_deprecation_trigger: security
+  rfc8594_headers: false
+  rfc8594_note: >-
+    No Sunset or Deprecation response headers are documented. Deprecation is communicated
+    out of band (release notes, account contact), not on the wire.
+  source: https://developer.equifax.com/documentation
+  deprecated_operations: []
+  deprecated_operations_note: >-
+    Cannot be derived — Equifax publishes no OpenAPI, so no operation-level `deprecated:
+    true` flags are readable.
+breaking_change_contract:
+  published: true
+  consumer_must_tolerate_without_notice:
+    - a new optional parameter added to the URI
+    - new optional data elements in the request body
+    - a redirection status (301, 302) in place of the documented code
+    - additional fields in response bodies
+    - a dynamically changed rate limit surfacing as HTTP 429
+    - immediate deprecation of an API, parameter or field for security reasons
+  source: https://developer.equifax.com/documentation
+status_page:
+  published: false
+  probes:
+    - url: https://status.equifax.com/
+      status: 0
+      result: DNS NXDOMAIN — no host (2026-09-06)
+    - url: https://securityreports.equifax.com/
+      status: 200
+      result: >-
+        Exists but is a login wall for Equifax business users only; it is a security
+        report distribution portal, not an API status page.
+  note: >-
+    No API status / uptime page was found on any Equifax host. No StatusPage pointer is
+    emitted.
+sla:
+  published: false
+  note: >-
+    No public SLA. Production usage constraints and monetization are stated as "Please
+    contact your Equifax sales representative" / "contact your Equifax representative".
+support:
+  channel: https://developer.equifax.com/contact
+  escalation: >-
+    Equifax documents a 24-hour support team and an assigned API Integration Specialist
+    for 5xx escalation (see errors/equifax-error-codes.yml).
+promotion_lifecycle:
+  stages:
+    - name: Sandbox
+      approval: none
+      base_url: https://api.sandbox.equifax.com
+    - name: Test (UAT)
+      approval: Equifax product-team review, typically under 48 hours
+      base_url: https://api.uat.equifax.com
+    - name: Live
+      approval: second Equifax review plus a Go Live conversation
+      base_url: https://api.equifax.com
+  source: https://developer.equifax.com/documentation
+changelog:
+  see: changelog/equifax-changelog.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

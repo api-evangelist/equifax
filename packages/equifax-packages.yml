@@ -1,0 +1,94 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  npm registry search + registry.npmjs.org metadata, PyPI, RubyGems, and the Equifax
+  Developer Portal and github.com/Equifax-Public (2026-09-06).
+provider: Equifax
+providerId: equifax
+official_package_count: 0
+package_count: 4
+description: >-
+  Equifax publishes NO first-party client library for the Equifax Developer Portal API
+  products in any public package registry. The portal's own integration path is
+  hand-rolled HTTP plus an OAuth 2.0 client_credentials token, with a per-product OpenAPI
+  YAML downloadable only after sign-in and a "Run in Postman" option on the signed-in API
+  Reference tab. github.com/Equifax-Public holds exactly one repository
+  (SecurityControlsFramework) and it is not an SDK. No `SDKs` pointer is emitted in
+  apis.yml, because emitting one would credit Equifax with client libraries it does not
+  publish.
+registries_checked:
+  - registry: npm
+    query: equifax
+    first_party_hits: 0
+  - registry: pypi
+    query: equifax
+    status: 404
+    first_party_hits: 0
+  - registry: rubygems
+    query: equifax
+    status: 404
+    first_party_hits: 0
+  - registry: github
+    org: https://github.com/Equifax-Public
+    repos: 1
+    first_party_sdk_hits: 0
+    note: Equifax-Public/SecurityControlsFramework — a published security controls framework, not a client library.
+packages:
+  - name: '@kount/kount-ivs-browser-sdk'
+    registry: npm
+    url: https://www.npmjs.com/package/@kount/kount-ivs-browser-sdk
+    official: true
+    brand: Kount, an Equifax company
+    language: JavaScript
+    kind: browser SDK
+    version: 1.60.0
+    published: '2025-08-20'
+    description: >-
+      "Equifax Identity Toolkit is a client side library for interacting with" the Kount
+      identity/fraud service. Published under the @kount npm scope by the Kount org, which
+      Equifax acquired in 2021.
+    note: >-
+      Counted here as the ONLY first-party-published package found anywhere in the Equifax
+      family, but it wraps the Kount product surface, not the developer.equifax.com API
+      products this record profiles. Kount is profiled separately at all/kount, so it is
+      NOT counted in official_package_count for Equifax and does not earn an SDKs pointer
+      on this record.
+  - name: '@flexbase/equifax-node-client'
+    registry: npm
+    url: https://www.npmjs.com/package/@flexbase/equifax-node-client
+    official: false
+    publisher: Flexbase Technologies (third party)
+    language: TypeScript/Node
+    version: 0.1.0
+    published: '2022-11-11'
+    repository: https://github.com/flexbase-eng/equifax-node-client
+    note: >-
+      Third-party client. Last published 2022-11-11 — roughly four years stale against a
+      platform whose own UK changelog was updated 2025-11-25. Not endorsed by Equifax.
+  - name: '@pipedream/equifax'
+    registry: npm
+    url: https://www.npmjs.com/package/@pipedream/equifax
+    official: false
+    publisher: Pipedream (third party integration platform)
+    version: 0.0.1
+    published: '2024-11-04'
+    note: Integration-platform component, not an Equifax-authored SDK.
+  - name: equifax-credit-parser-ca
+    registry: npm
+    url: https://www.npmjs.com/package/equifax-credit-parser-ca
+    official: false
+    publisher: independent
+    version: 0.0.4-alpha2
+    published: '2021-02-11'
+    note: >-
+      Third-party parser for the Equifax Canada fixed-format-file credit report. Parses
+      Equifax output; does not call the API.
+gaps:
+  - >-
+    A consumer integrating an Equifax API product today writes the HTTP client themselves.
+    The strongest thing Equifax could ship for developer ergonomics is a first-party SDK
+    in any one language, or simply a publicly downloadable OpenAPI so generators can
+    produce one.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

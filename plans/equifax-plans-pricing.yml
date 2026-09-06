@@ -4,103 +4,79 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Equifax
 providerId: equifax
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-06'
+generated: '2026-09-06'
+method: searched
+source: https://developer.equifax.com/documentation
+reconciled: true
 tags:
   - Credit Bureau
   - Identity
   - Fraud Prevention
   - Consumer Data
   - Verification
-description: Equifax is a regulated US credit bureau and data broker. Its developer portal lists products
-  across Credit Risk, Identity & Fraud, Verification, Workforce Management, and Marketing, but does not
-  publish a public price list. Access is contracted per product and per use-case (FCRA-compliant) with
-  per-inquiry / per-pull pricing negotiated directly with Equifax sales.
+description: >-
+  Equifax publishes NO plans, tiers, prices or price list for any API product, in any
+  region. Its own developer documentation says so directly: for the Live environment,
+  "Monetization: This varies according to the API product. Please contact your Equifax
+  representative", and "Usage constraints: Please contact your Equifax sales
+  representative". Sandbox and Test are explicitly free. Commercial terms for production
+  access are negotiated per product and per use case, gated by FCRA permissible purpose,
+  and settled in a contract before an application is promoted to Live.
 sources:
-  - https://developer.equifax.com/products
-  - https://www.equifax.com
-notes: No public pricing for Equifax APIs. Pricing is per-product, per-pull, or per-inquiry, negotiated
-  via contract; specific rates depend on use-case eligibility, volume, and regulatory category (FCRA
-  vs non-FCRA).
-plans:
+  - url: https://developer.equifax.com/documentation
+    status: 200
+    what: Environments section — the monetization statement for Sandbox, Test and Live.
+  - url: https://developer.equifax.com/products/apiproducts
+    status: 200
+    what: 48 API product tiles; no product tile carries a price.
+  - url: https://developer.equifax.com/help-support/getting-started
+    status: 200
+    what: '"contact us to discuss our requirements for access and integration" before Go Live.'
+plan_count: 0
+plan_count_note: >-
+  An honest zero. Equifax publishes no purchasable tier of any kind — no free tier, no
+  self-serve price, no rate card. This replaces a 2026-05-04 bulk-sweep artifact that
+  listed four "plans" priced "contact sales"; those were product FAMILIES inferred from
+  the product catalog, not plans Equifax publishes, and they are preserved below under
+  productFamilies where they belong.
+plans: []
+free_tier:
+  exists: true
+  scope: non-production only
+  detail: >-
+    Sandbox and Test/UAT are free ("You don't incur any cost for testing the API in the
+    Sandbox environment"; the same statement is made for UAT/Test), self-service after
+    portal registration for Sandbox, and approval-gated for Test. There is no free or
+    priced production tier.
+pricing_model:
+  published: false
+  shape: per-product, per-use-case contract negotiated with an Equifax representative
+  buyer_path: https://developer.equifax.com/contact
+productFamilies:
   - id: equifax-credit-risk
-    name: Credit Risk Products
-    type: enterprise
-    description: Credit reports, attributes, scores (FICO, VantageScore, Equifax-developed). Per-pull
-      pricing under FCRA-permissible use.
-    entries:
-      - label: Credit pull
-        name: credit_inquiry
-        type: metered
-        metric: inquiry
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: Consumer credit report
-      - name: Credit attributes
-      - name: Risk scores
+    name: Credit Risk
+    elements: [Consumer credit report, Credit attributes, Risk scores]
+    example_products: [OneView Consumer Credit Report, Scores and Attributes, Prescreen One, Prequalification One]
   - id: equifax-identity-fraud
     name: Identity & Fraud
-    type: enterprise
-    description: Identity verification, fraud signals, KYC compliance products.
-    entries:
-      - label: Identity / fraud check
-        name: identity_check
-        type: metered
-        metric: check
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: Identity verification
-      - name: Fraud signals
-      - name: KYC compliance
+    elements: [Identity verification, Fraud signals, KYC compliance]
+    example_products: [Digital Identity Trust, Document Verification, State-Issued ID Trust, FraudIQ Identity Scan Alert, AML Connect]
   - id: equifax-verification
-    name: The Work Number / Verification Services
-    type: enterprise
-    description: Income and employment verification (The Work Number).
-    entries:
-      - label: Verification pull
-        name: verification_pull
-        type: metered
-        metric: pull
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: Income verification
-      - name: Employment verification
+    name: Verification Services (The Work Number)
+    elements: [Income verification, Employment verification]
+    example_products: [Verify Suite, Account Verification, Verification Exchange Canada, Alternative Employment and Income Data]
   - id: equifax-marketing-data
-    name: Data-driven Marketing
-    type: enterprise
-    description: Demographic, financial, and consumer data for targeted marketing.
-    entries:
-      - label: Marketing data
-        name: marketing_data
-        type: metered
-        metric: record
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: Consumer demographics
-      - name: Audience segmentation
+    name: Data-driven Marketing and Insights
+    elements: [Consumer demographics, Audience segmentation, Property and asset data]
+    example_products: [Wallet Insights, Property Insights, Address Insights, Asset View]
+familyNote: >-
+  Families are our grouping of the 48 product tiles Equifax lists at
+  /products/apiproducts. They carry no price and are NOT plans; they are kept so the
+  catalog retains the product shape it had before this file was corrected.
+notes: >-
+  Any price quoted for an Equifax API anywhere is a contract term, not a published one.
+  Do not synthesize a rate card for this provider.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

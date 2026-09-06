@@ -1,0 +1,47 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  Search of the Equifax developer portal, equifax.com, github.com/Equifax-Public, the
+  official MCP registry and the open web (2026-09-06), plus live probes of every Equifax
+  host in this record.
+provider: Equifax
+providerId: equifax
+status: none
+tool_count: 0
+tools: []
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+description: >-
+  Equifax ships no MCP server — no hosted/remote endpoint, no stdio package, no entry in
+  the official MCP registry, and no mention of MCP anywhere on developer.equifax.com or in
+  the equifax.com llms.txt. No candidate tool list is derived either: deriving one
+  requires an OpenAPI to read operations from, and Equifax's per-product OpenAPI is
+  downloadable only after a developer-portal sign-in. No MCPServer pointer is emitted in
+  apis.yml — this file records an absence, not a surface.
+probes:
+  - url: https://www.equifax.com/.well-known/ai-plugin.json
+    status: 404
+  - url: https://developer.equifax.com/.well-known/ai-plugin.json
+    status: 404
+  - url: https://api.equifax.com/.well-known/ai-plugin.json
+    status: 404
+  - url: https://mcp.equifax.com/
+    status: 0
+    result: DNS NXDOMAIN — no host
+  - url: https://www.equifax.com/llms.txt
+    status: 200
+    result: >-
+      Served, but a marketing sitemap for consumer and business product pages. It names no
+      API, no developer portal page, and no MCP or agent endpoint.
+blocked_by:
+  - >-
+    No public OpenAPI. Until Equifax publishes a contract, neither Equifax nor anyone else
+    can generate a faithful MCP tool surface for these products.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

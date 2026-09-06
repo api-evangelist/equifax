@@ -1,0 +1,155 @@
+generated: '2026-09-06'
+method: searched
+source: https://assets.equifax.com/marketing/US/assets/developer-quick-start-guide.PDF
+provider: Equifax
+providerId: equifax
+sources:
+  - url: https://assets.equifax.com/marketing/US/assets/developer-quick-start-guide.PDF
+    status: 200
+    what: >-
+      "Equifax for Developers - Quick Start Guide" (Teletrack migration). Publishes the
+      common error codes and the instruction for each. This is the only public,
+      first-party Equifax error reference found.
+  - url: https://developer.equifax.com/documentation
+    status: 200
+    what: 401 on invalid token; 429 on dynamic rate limiting.
+  - url: https://api.equifax.com/
+    status: 404
+    what: Live probe of the gateway envelope shape (2026-09-06).
+format: proprietary
+rfc9457: false
+envelope:
+  gateway:
+    fields:
+      - name: efxErrorCode
+        type: string
+        note: Dotted code, e.g. "404.01". Observed as a bare number on api.sandbox.equifax.com.
+      - name: description
+        type: string
+    example: '{"efxErrorCode":"404.01","description":"Not Found - The specified resource does not exist"}'
+  oauth:
+    fields:
+      - name: error
+        type: string
+        note: RFC 6749 error code.
+      - name: error_description
+        type: string
+    example: '{"error":"invalid_request","error_description":"Missing Mandatory Parameters"}'
+  soap:
+    note: >-
+      The documented Teletrack endpoints are a SOAP 1.2 service, not REST, and return a
+      DIFFERENT error shape: a soap-envelope Fault whose env:Detail carries <ErrorCode>
+      and <Description>. Probed unauthenticated on 2026-09-06 at
+      https://api.equifax.com/business/tt/service/v1/inquiry (HTTP 415,
+      Content-Type: application/soap+xml).
+    fields:
+      - name: env:Fault/env:Code/env:Value
+        type: string
+        note: e.g. env:Receiver
+      - name: env:Fault/env:Reason/env:Text
+        type: string
+      - name: env:Fault/env:Detail/ErrorCode
+        type: string
+        note: mirrors the HTTP status, e.g. 415
+      - name: env:Fault/env:Detail/Description
+        type: string
+    example: >-
+      <env:Fault><env:Code><env:Value>env:Receiver</env:Value></env:Code><env:Reason><env:Text
+      xml:lang="en">Missing Content Type</env:Text></env:Reason><env:Detail><ErrorCode>415</ErrorCode><Description>Missing
+      Content Type</Description></env:Detail></env:Fault>
+  correlation_header: efx-transaction-id
+error_count: 11
+errors:
+  - status: 400
+    title: Bad Request
+    meaning: >-
+      The outbound request cannot be processed as it is perceived to be a client error
+      (e.g. malformed request syntax).
+    remediation: Correct the request syntax and payload before retrying.
+    class: client
+  - status: 400
+    code: invalid_request
+    title: Missing Mandatory Parameters
+    meaning: The OAuth token request omitted a required parameter.
+    remediation: Send client_id, client_secret and scope on the token request.
+    class: auth
+    observed: https://api.equifax.com/v2/oauth/token (2026-09-06)
+  - status: 401
+    title: Not Authorized
+    meaning: >-
+      The Production Client ID and Secret must be used, or the client receives an
+      unauthorized status indicating the request has not been applied. All requests must
+      contain a valid Access Token; requests with invalid tokens are denied.
+    remediation: >-
+      Obtain a token from the SAME environment you are calling; tokens are not portable
+      between Sandbox, Test and Live.
+    class: auth
+  - status: 403
+    title: Forbidden
+    meaning: >-
+      The server understood the request but refuses to authorize it. Similar to 401, but
+      access is permanently forbidden and tied to application logic, such as insufficient
+      rights to a resource.
+    remediation: Ensure the calling Gateway IP is properly allow-listed for production.
+    class: auth
+  - status: 404
+    title: Not Found
+    meaning: >-
+      The request was unable to communicate with a given server as the server could not
+      find what was requested.
+    remediation: Verify the path, the version segment and the environment base URL.
+    class: client
+    efx_code: '404.01'
+  - status: 415
+    title: Unsupported Media Type
+    meaning: >-
+      The server refused the request as the payload format was not supported. The format
+      problem might be due to the request's Content-Type or Content-Encoding.
+    remediation: Send the Content-Type the product documents (JSON, or XML for Teletrack furnishing).
+    class: client
+  - status: 429
+    title: Too Many Requests
+    meaning: >-
+      A rate limit applied to the API was exceeded. Equifax states limits "may change
+      dynamically and may result in the API returning http status code 429".
+    remediation: Back off and retry later; limits are contract- and product-specific.
+    class: throttling
+    source: https://developer.equifax.com/documentation
+  - status: 500
+    title: Internal Server Error
+    meaning: Server-side failure.
+    remediation: >-
+      Equifax instructs integrators to open a trouble ticket with the 24-hour support team
+      and alert their API Integration Specialist to expedite resolution.
+    class: server
+  - status: 501
+    title: Not Implemented
+    meaning: Server-side failure.
+    remediation: Same escalation path as 500.
+    class: server
+  - status: 503
+    title: Equifax Services are not available
+    meaning: Server-side unavailability.
+    remediation: Same escalation path as 500; retry with exponential backoff.
+    class: server
+  - status: 504
+    title: Gateway timeout
+    meaning: Server-side failure at the gateway.
+    remediation: Same escalation path as 500.
+    class: server
+gaps:
+  - >-
+    No product-level business error registry is public. Product-specific response codes
+    (decline / no-hit / no-record reasons for a credit inquiry, verification or identity
+    check) live in the per-product API Reference, which requires a developer-portal
+    sign-in.
+  - Equifax does not use RFC 9457 application/problem+json.
+  - >-
+    Three different error envelopes are in play across one platform - the Apigee JSON
+    envelope (efxErrorCode/description), the OAuth RFC 6749 envelope
+    (error/error_description), and a SOAP 1.2 Fault with ErrorCode/Description on the
+    Teletrack endpoints. Nothing public tells an integrator which one a given product
+    returns; you find out by calling it.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

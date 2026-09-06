@@ -1,0 +1,148 @@
+generated: '2026-09-06'
+method: searched
+source: https://developer.equifax.com/documentation
+provider: Equifax
+providerId: equifax
+sources:
+  - https://developer.equifax.com/documentation
+  - https://developer.equifax.com/help-support/getting-started
+  - https://assets.equifax.com/marketing/US/assets/developer-quick-start-guide.PDF
+  - probed: https://api.equifax.com/ (HTTP 404, Apigee JSON error envelope, 2026-09-06)
+description: >-
+  Cross-cutting runtime semantics for the Equifax API platform, read from the public
+  Developer Portal documentation page and from live unauthenticated probes of the
+  api.equifax.com gateway. No OpenAPI is published (the per-product specification is
+  downloadable only after a portal sign-in), so nothing here is derived from a contract —
+  every entry names the document or probe it came from.
+auth:
+  style: OAuth 2.0 client_credentials bearer token
+  header: 'Authorization: Bearer <access_token>'
+  per_environment: true
+  see: authentication/equifax-authentication.yml
+versioning:
+  style: major version in the URI path segment
+  example: POST https://api.equifax.com/namespace/v1/resource
+  real_example: https://api.equifax.com/business/tt/service/v1/inquiry
+  policy: >-
+    "Backward incompatible changes to API contracts results in the release of a new
+    version." Backward-compatible changes are tracked but do not alter existing contracts.
+  breaking_change_definition_published: true
+  consumer_must_tolerate:
+    - a new optional parameter added to the URI
+    - new optional data elements in the request body
+    - a redirection status (301, 302) in place of the documented code
+    - additional fields in response bodies
+    - a dynamically changed rate limit surfacing as HTTP 429
+    - immediate deprecation of an API, parameter or field for security reasons
+  source: https://developer.equifax.com/documentation
+error_envelope:
+  format: proprietary JSON
+  rfc9457: false
+  gateway_shape:
+    efxErrorCode: string or number, e.g. "404.01"
+    description: human-readable string
+  observed: '{"efxErrorCode":"404.01","description":"Not Found - The specified resource does not exist"}'
+  observed_at: https://api.equifax.com/ (2026-09-06)
+  oauth_shape:
+    error: RFC 6749 error code, e.g. invalid_request
+    error_description: human-readable string
+  correlation_header: efx-transaction-id
+  correlation_note: >-
+    Every response from the api.equifax.com gateway carries an `efx-transaction-id`
+    response header (observed 2026-09-06); it is the request-tracing identifier to quote
+    to Equifax support. Equifax does not document a client-supplied request-id header.
+  see: errors/equifax-error-codes.yml
+rate_limit_signaling:
+  status_on_exhaustion: 429
+  headers_published: false
+  note: >-
+    Equifax documents only that "Rate limits applied to an API may change dynamically and
+    may result in the API returning http status code 429." No RateLimit-* / X-RateLimit-*
+    header contract and no numeric limits are published.
+  see: rate-limits/equifax-rate-limits.yml
+pagination:
+  style: undocumented
+  note: >-
+    No pagination convention is published on any public Equifax developer page. Equifax
+    products are predominantly single-subject request/response calls (one inquiry, one
+    verification), where pagination would not apply, but this is an absence of
+    documentation rather than a documented absence.
+expansion:
+  supported: unknown
+  note: No field-expansion or sparse-fieldset convention is published.
+metadata:
+  supported: unknown
+  note: No customer-defined metadata convention is published.
+idempotency:
+  supported: false
+  coverage: none
+  mechanism: null
+  header: null
+  retention: null
+  note: >-
+    Equifax publishes NO replay-protection mechanism — no Idempotency-Key header, no
+    client-supplied request identifier, no documented safe-retry contract. This matters
+    more here than for a typical API: an Equifax credit inquiry posts to the consumer's
+    bureau file, so a blind retry is not a no-op, and Equifax's own guidance is to back
+    off rather than retry. Coverage is `none` — the mutating surface (inquiry, furnishing
+    / reporting) has no documented idempotency at all.
+  evidence:
+    - https://developer.equifax.com/documentation
+    - https://assets.equifax.com/marketing/US/assets/developer-quick-start-guide.PDF
+reversibility:
+  grade: none
+  applicable: true
+  applicable_reason: >-
+    Not a read-only API. Equifax publishes at least one true write surface — Teletrack
+    furnishing / reporting (POST https://api.equifax.com/business/tt/furnishing/v1/reporting),
+    which writes consumer trade-line data to Equifax — and credit inquiries themselves
+    leave a durable inquiry record on the consumer's file.
+  reversal_operations: []
+  window: null
+  note: >-
+    No reversal, void, cancel, delete-correction or rollback operation is documented on
+    any public Equifax developer page, and no window is stated for undoing a furnished
+    record or an inquiry. Correction of furnished data runs through the FCRA dispute
+    process (a consumer- and compliance-side workflow), not through a published API
+    operation. This is recorded as `none` — an absence of published reversal, NOT an
+    assertion that no internal correction path exists. No window is asserted because
+    Equifax states none.
+  evidence:
+    - url: https://developer.equifax.com/documentation
+      status: 200
+    - url: https://assets.equifax.com/marketing/US/assets/developer-quick-start-guide.PDF
+      status: 200
+dry_run_mode:
+  supported: true
+  mechanism: separate environments, not a per-request flag
+  note: >-
+    Equifax provides Sandbox (https://api.sandbox.equifax.com) and Test/UAT
+    (https://api.uat.equifax.com) environments with their own credentials rather than a
+    dry-run parameter on a production call. See sandbox/equifax-sandbox.yml.
+transport:
+  tls_required: true
+  client_certificates: >-
+    Equifax instructs integrators to apply Sectigo certificates across production and
+    lower environments before sending production traffic.
+  ip_allow_listing: required for production; configured per application (IPv4/IPv6, optional CIDR)
+  content_types_observed:
+    - application/json
+    - application/soap+xml
+  protocol_note: >-
+    The Equifax platform is not uniformly REST. The two publicly documented Teletrack
+    endpoints (https://api.equifax.com/business/tt/service/v1/inquiry and
+    /business/tt/furnishing/v1/reporting) are LIVE SOAP 1.2 services: an unauthenticated
+    request on 2026-09-06 returned Content-Type application/soap+xml carrying a
+    soap-envelope Fault. Neither ?wsdl nor ?singleWsdl returns a WSDL — both return the
+    same SOAP fault — so even the SOAP contract is unpublished. Other products are JSON
+    over the same gateway. An integrator cannot tell which protocol a product speaks
+    without signing in to read its API Reference.
+cross_links:
+  errors: errors/equifax-error-codes.yml
+  lifecycle: lifecycle/equifax-lifecycle.yml
+  authentication: authentication/equifax-authentication.yml
+  rate_limits: rate-limits/equifax-rate-limits.yml
+  sandbox: sandbox/equifax-sandbox.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
