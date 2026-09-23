@@ -1,7 +1,9 @@
 ---
 title: Explainability and Artificial Intelligence
 url: https://www.equifax.com/newsroom/all-news/-/story/explainability-and-artificial-intelligence/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Equifax" press release artificial intelligence'
 position: 5
 source: serpapi-google
