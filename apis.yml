@@ -101,6 +101,8 @@ apis:
       - type: RateLimits
         url: rate-limits/equifax-rate-limits.yml
 common:
+  - type: RateLimits
+    url: rate-limits/equifax-rate-limits.yml
   - type: DomainSecurity
     url: security/equifax-domain-security.yml
   - type: GitHubOrganization
