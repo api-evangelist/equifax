@@ -88,3 +88,62 @@
     detected: '2026-10-15'
   status: not-a-workflow
   arazzo: null
+- slug: equifax-aws-data-exchange
+  label: AWS Data Exchange
+  partner: amazon-data-exchange
+  partner_name: AWS Data Exchange
+  category: data product listing
+  type: marketplace
+  marketplace: amazon-data-exchange-marketplace
+  channel: distribution
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=df8eb6dc-ca0e-43d8-90fa-ea1c87e24243
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: AWS Data Exchange (AWS Marketplace discovery search, FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE + seller-profile
+      sellerWebsiteUrl)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Equifax
+    matched_domain: equifax.com
+    matched_by: domain
+    listings: 25
+    sample_listings:
+    - Affluence Index™ (Demo/Sample)
+    - Analytic Dataset
+    - Analytic Dataset (Demo/Sample)
+    - B2bConnect™ - Business Firmographics (Demo/Sample)
+    - Commercial Real Estate - AMP Insights (Demo/Sample)
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: equifax-snowflake-marketplace
+  label: Snowflake Marketplace
+  partner: snowflake
+  partner_name: Snowflake Marketplace
+  category: data product listing
+  type: marketplace
+  marketplace: snowflake-marketplace
+  channel: distribution
+  evidence: https://app.snowflake.com/marketplace/providers/GZT0ZOSU8R5
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Snowflake Marketplace providers (app.snowflake.com/marketplace/providers, rendered; names only, Wikidata
+      P856 identity step)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Equifax
+    matched_domain: equifax.com
+    matched_by: domain
+    listings: 57
+    sample_listings: []
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+    identity_source: wikidata
+    identity_note: wikidata P856 equifax.com for 'Equifax' (labelled identity step)
+  status: not-a-workflow
+  arazzo: null
