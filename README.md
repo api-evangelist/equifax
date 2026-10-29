@@ -1,4 +1,4 @@
-# Equifax (equifax)
+# Equifax
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,49 +66,116 @@
 
 Equifax is a consumer credit reporting agency that collects and aggregates information on individuals' credit history, including borrowing and repayment habits. This information is used by lenders and creditors to assess creditworthiness and make decisions about extending credit. Equifax also offers identity theft protection, credit monitoring, and fraud detection services, plus analytics and consulting offerings to help businesses manage risk.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/equifax/refs/heads/main/apis.yml)
+**Areas:** Credit · Credit History · Credit Reporting · Identity · Fraud Prevention · Fortune 1000
 
-## Scope
+## Equifax on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Equifax is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/equifax/](https://apis.io/providers/equifax/)** — or go straight to one of the APIs or properties below.
 
-## Tags:
+### APIs (1)
 
- - Credit, Credit History, Credit Reporting, Identity, Fraud Detection
+- [Equifax API](https://apis.io/apis/equifax/equifax/) — The Equifax API platform provides programmatic access to Equifax's consumer credit information, including credit reports, credit scores, identity…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-24
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Security (4)
 
-### Equifax API
+Authentication, trust centre, and vulnerability disclosure.
 
-The Equifax API platform provides programmatic access to Equifax's consumer credit information, including credit reports, credit scores, identity verification, and fraud detection. APIs are organized into categories that include Payment and Transaction, Geo/Location, Identity, Data Append, and Mobile, with featured products such as OneView, WalletInsights, Talent Report, PowerLead Check, Verification Exchange, Score Only, and OFAC Alert. Developer access is gated through the Equifax Developer Portal.
+- [Equifax Authentication](https://apis.io/security/equifax/equifax-authentication/)
+- [Equifax Domain Security](https://apis.io/security/equifax/equifax-domain-security/)
+- [Equifax Trust Center](https://apis.io/security/equifax/equifax-trust-center/)
+- [Equifax Vulnerability Disclosure](https://apis.io/security/equifax/equifax-vulnerability-disclosure/)
 
-**Human URL:** [https://developer.equifax.com/](https://developer.equifax.com/)
+#### OAuth scopes (1)
 
-#### Tags
+The permissions the API asks for.
 
-- Credit, Credit History, Credit Reporting, Identity, Fraud Detection
+- [Equifax Scopes](https://apis.io/scopes/equifax/equifax-scopes/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://developer.equifax.com/)
-- [Developer](https://developer.equifax.com/)
-- [Products](https://developer.equifax.com/products/apiproducts)
-- [GettingStarted](https://developer.equifax.com/help-support/getting-started)
+Published plans, tiers and prices.
 
-## Common Properties
+- [Equifax Plans Pricing](https://apis.io/plans/equifax/equifax-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Equifax Rate Limits](https://apis.io/rate-limits/equifax/equifax-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Equifax Finops](https://apis.io/finops/equifax/equifax-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.equifax.com/)
-- [Developer](https://developer.equifax.com/)
+- [Sign up](https://developer.equifax.com/user/register)
+- [Support](https://developer.equifax.com/contact)
+- [Blog](https://www.equifax.com/newsroom/)
+- [Terms of service](https://developer.equifax.com/terms)
+- [Privacy policy](https://www.equifax.com/privacy/privacy-statement)
+- [GitHub](https://github.com/Equifax-Public)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 45.8** — developing · rubric 0.25.0 · scored 2026-10-23
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 68.4 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 50.0 |
+
+**Agent readiness 7.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/equifax/](https://apis.io/providers/equifax/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Equifax: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/equifax/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
